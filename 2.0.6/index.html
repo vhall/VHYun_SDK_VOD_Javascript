@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="file" name="file" id="uploadInput" multiple>
+  <button id="upload">上传</button>
+  <button id="delete">删除</button>
+<script type="text/javascript" src="vhall-jssdk-upload-2.0.6.js"></script></body>
+<script>
+  window.onload = function () {
+    VhallUpload.createInstance({
+      appId: " d317f559", token: "vhall", accountId: "zx"
+    }, res => {
+      window.interface = res.interface;
+    });
+    document.querySelector("#upload").addEventListener("click", function () {
+      const input = document.querySelector("#uploadInput");
+      const files = input.files; 
+
+      const fileArr = [];
+      // 添加文件列表
+      for (let index = 0; index < files.length; index++) { const element = files[index]; fileArr.push(element); }
+      window.interface.test(fileArr, function (res) { console.log(res); }, function (res) {
+        console.log(`上传成功`, res)
+      }, function (err) { console.error("上传失败", err) })
+    })
+    document.querySelector("#delete").addEventListener("click", function () {
+      const
+      input = document.querySelector("#uploadInput"); const file = input.files[0]; window.interface.testDelete(file);
+    })
+  }
+</script>
+
+</html>
